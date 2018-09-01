@@ -12,6 +12,10 @@ three_black_crow = {
     id.window_size: 14,
     id.wick_percentage: 0.5
 }
+three_white_soldiers = {
+    id.window_size: 14,
+    id.wick_percentage: 0.5
+}
 
 # database
 database = {

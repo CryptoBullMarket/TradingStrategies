@@ -21,7 +21,7 @@ def __small_lower_wick(price):
            < constants.three_black_crow[id.wick_percentage]
 
 
-def __downtrend(price_action, window_size):
+def __uptrend(price_action, window_size):
     # will replace this by library function
     total = 0
     for i, p in enumerate(price_action):
@@ -29,7 +29,7 @@ def __downtrend(price_action, window_size):
         if i % window_size == 0:
             sma = total/window_size
             total -= price_action[i-window_size][id.close]
-            if p[id.close] > sma:
+            if p[id.close] < sma:
                 return False
     return True
 
@@ -51,7 +51,7 @@ def three_black_crows(key, price_action, time_frame):
                  and __small_lower_wick(price_action.iloc[-3])
 
     # find trend for candles from -17 to -3
-    trend = __downtrend(price_action[-2*window_size - 3:-3], window_size)
+    trend = __uptrend(price_action[-2*window_size - 3:-3], window_size)
 
     # check strategy
     if trend and crows and lower_wick:
