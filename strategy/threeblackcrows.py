@@ -38,23 +38,23 @@ def __downtrend(price_action, window_size):
 def three_black_crows(key, price_action, time_frame):
     window_size = constants.three_black_crow[id.window_size]
     # crows=check if the last 3 candles are crows
-    crows = __is_bear(price_action[-1][id.open], price_action[-1][id.close]) \
-            and __is_bear(price_action[-2][id.open], price_action[-2][id.close]) \
-            and __is_bear(price_action[-3][id.open], price_action[-3][id.close]) \
-            and __is_lower(price_action[-1][id.open], price_action[-1][id.close],
-                           price_action[-2][id.open], price_action[-2][id.close], price_action[-2][id.low]) \
-            and __is_lower(price_action[-2][id.open], price_action[-2][id.close],
-                           price_action[-3][id.open], price_action[-3][id.close], price_action[-3][id.low])
+    crows = __is_bear(price_action.iloc[-1][id.open], price_action.iloc[-1][id.close]) \
+            and __is_bear(price_action.iloc[-2][id.open], price_action.iloc[-2][id.close]) \
+            and __is_bear(price_action.iloc[-3][id.open], price_action.iloc[-3][id.close]) \
+            and __is_lower(price_action.iloc[-1][id.open], price_action.iloc[-1][id.close],
+                           price_action.iloc[-2][id.open], price_action.iloc[-2][id.close], price_action.iloc[-2][id.low]) \
+            and __is_lower(price_action.iloc[-2][id.open], price_action.iloc[-2][id.close],
+                           price_action.iloc[-3][id.open], price_action.iloc[-3][id.close], price_action.iloc[-3][id.low])
     # check lower wick
-    lower_wick = __small_lower_wick(price_action[-1]) \
-                 and __small_lower_wick(price_action[-2]) \
-                 and __small_lower_wick(price_action[-3])
+    lower_wick = __small_lower_wick(price_action.iloc[-1]) \
+                 and __small_lower_wick(price_action.iloc[-2]) \
+                 and __small_lower_wick(price_action.iloc[-3])
 
     # find trend for candles from -17 to -3
     trend = __downtrend(price_action[-2*window_size - 3:-3], window_size)
 
     # check strategy
     if trend and crows and lower_wick:
-        db.insert_strategy(key, time_frame, values.three_black_crow, price_action[-1][id.time])
+        db.insert_strategy(key, time_frame, values.three_black_crow, price_action.iloc[-1][id.time])
 
 
