@@ -51,7 +51,7 @@ def three_white_soldiers(key, price_action, time_frame):
                  and __small_upper_wick(price_action.iloc[-3])
 
     # find trend for candles from -17 to -3
-    trend = __downtrend(price_action[-2*window_size - 3:-3], window_size)
+    trend = __downtrend(price_action.loc[-2*window_size - 3:-3], window_size)
 
     # check strategy
     if trend and soldiers and lower_wick:
