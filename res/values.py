@@ -1,7 +1,9 @@
 from res import id as id
 
-three_black_crow = 'TBC'
+three_black_crow = 'Three Black Crows'
 three_white_soldiers = 'Three White Soldiers'
+double_top = 'Double Top'
+double_bottom = 'Double Bottom'
 
 # time frame
 time_frame = {
