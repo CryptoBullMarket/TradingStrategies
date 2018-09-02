@@ -14,7 +14,6 @@ def get_price_action(_from, _to, time_frame):
     data = pd.DataFrame(data)
 
     data.columns = [id.time, id.open, id.close, id.high, id.close, id.volume]
-    data = data.sort_values(by=[id.time])
 
     # filter data as needed
     return data
