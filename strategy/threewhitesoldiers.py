@@ -22,9 +22,9 @@ def __small_upper_wick(price):
 
 
 def __downtrend(price_action, window_size):
-    sma = ta.SMA(price_action, window_size)
+    ema = ta.EMA(price_action, window_size)
     for i in range(1, window_size + 1):
-        if price_action[-i] > sma[-i]:
+        if price_action[-i] > ema[-i]:
             return False
     return True
 
