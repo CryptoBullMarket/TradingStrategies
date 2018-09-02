@@ -4,7 +4,11 @@ import os
 
 # url
 url = {
-    id.price_action: 'https://api.bitfinex.com/v2/candles/trade:{}:t{}{}/hist?sort=1',
+    id.price_action: 'https://api.bitfinex.com/v2/candles/trade:{}:t{}{}/hist',
+}
+# url params
+url_params = {
+    id.price_action: {'sort': 1, 'limit': 50}
 }
 
 # strategy wise

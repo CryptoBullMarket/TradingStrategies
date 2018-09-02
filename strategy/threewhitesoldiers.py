@@ -1,6 +1,6 @@
 from res import id as id, values as values, constants as constants
 import handler.database as db
-
+import talib
 
 def __is_bull(open, close):
     return close > open
@@ -22,15 +22,10 @@ def __small_upper_wick(price):
 
 
 def __downtrend(price_action, window_size):
-    # will replace this by library function
-    total = 0
-    for i, p in enumerate(price_action):
-        total += p[id.close]
-        if i % window_size == 0:
-            sma = total/window_size
-            total -= price_action[i-window_size][id.close]
-            if p[id.close] > sma:
-                return False
+    sma = ta.SMA(price_action, window_size)
+    for i in range(1, window_size + 1):
+        if price_action[-i] > sma[-i]:
+            return False
     return True
 
 
@@ -41,17 +36,17 @@ def three_white_soldiers(key, price_action, time_frame):
     soldiers = __is_bull(price_action.iloc[-1][id.open], price_action.iloc[-1][id.close]) \
             and __is_bull(price_action.iloc[-2][id.open], price_action.iloc[-2][id.close]) \
             and __is_bull(price_action.iloc[-3][id.open], price_action.iloc[-3][id.close]) \
-            and __is_higher(price_action.iloc[-1][id.open], price_action.iloc[-1][id.close],
-                           price_action.iloc[-2][id.open], price_action.iloc[-2][id.close], price_action.iloc[-2][id.low]) \
-            and __is_higher(price_action.iloc[-2][id.open], price_action.iloc[-2][id.close],
-                           price_action.iloc[-3][id.open], price_action.iloc[-3][id.close], price_action.iloc[-3][id.low])
+            and __is_higher(price_action.iloc[-1][id.open], price_action.iloc[-1][id.close], price_action.iloc[-1][id.low],
+                           price_action.iloc[-2][id.open], price_action.iloc[-2][id.close]) \
+            and __is_higher(price_action.iloc[-2][id.open], price_action.iloc[-2][id.close], price_action.iloc[-2][id.low],
+                           price_action.iloc[-3][id.open], price_action.iloc[-3][id.close])
     # check lower wick
     lower_wick = __small_upper_wick(price_action.iloc[-1]) \
                  and __small_upper_wick(price_action.iloc[-2]) \
                  and __small_upper_wick(price_action.iloc[-3])
 
-    # find trend for candles from -17 to -3
-    trend = __downtrend(price_action.loc[-2*window_size - 3:-3], window_size)
+    # find trend for candles from -17 to -3, extra window_size data for sma buffer
+    trend = __downtrend(price_action.iloc[-2*window_size - 3:-3][id.close].values, window_size)
 
     # check strategy
     if trend and soldiers and lower_wick:
