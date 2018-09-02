@@ -4,7 +4,7 @@ import os
 
 # url
 url = {
-    id.price_action: 'https://api.bitfinex.com/v2/candles/trade:{}:t{}{}/hist',
+    id.price_action: 'https://api.bitfinex.com/v2/candles/trade:{}:t{}{}/hist?sort=1',
 }
 
 # strategy wise
@@ -15,7 +15,6 @@ three_black_crow = {
 
 double_top_double_bottom = {
     id.window_size: 14,
-    id.
 }
 
 # database
