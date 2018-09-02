@@ -1,14 +1,18 @@
 from handler import connection as connection
-from strategy import threeblackcrows as tbc
+from strategy import threeblackcrows as tbc, doubleTopDoubleBottom as dtdb
 from util import utils as utils
-from res import id as id, values as values
+from res import id as id, values as values, constants as constants
 
 
-key = 'BTC_USD'
-[_from, _to] = utils.dekey(key)
-time_frame = values.time_frame[id.tf_string][id._1h]
 
-price_action = connection.get_price_action(_from, _to, time_frame)
+def examineStrategies(time_frame):
 
-tbc.three_black_crows(key, price_action, time_frame)
+    for key in constants.coinbase:
+        [_from, _to] = utils.dekey(key)
+        price_action = connection.get_price_action(_from, _to, time_frame)
+        tbc.three_black_crows(key, price_action, time_frame)
+        dtdb.double_top_double_bottom(key, price_action, time_frame)
 
+if __name__ == "__main__":
+    #connection.get_symbol_list()
+    examineStrategies('1h')

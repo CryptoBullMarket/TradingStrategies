@@ -1,10 +1,10 @@
 # api id
-time = 0
-open = 1
-close = 2
-high = 3
-low = 4
-volume= 5
+time = 'time'
+open = 'open'
+close = 'close'
+high = 'high'
+low = 'low'
+volume= 'volume'
 
 window_size = 'window_size'
 price_action = 'price_action'
