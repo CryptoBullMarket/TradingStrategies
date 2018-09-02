@@ -1,18 +1,15 @@
 from handler import connection as connection
 from strategy import threeblackcrows as tbc, doubleTopDoubleBottom as dtdb
-from util import utils as utils
-from res import id as id, values as values, constants as constants
+from res import constants as constants
 
 
-
-def examineStrategies(time_frame):
-
+def examine_strategies(time_frame):
     for key in constants.coinbase:
-        [_from, _to] = utils.dekey(key)
-        price_action = connection.get_price_action(_from, _to, time_frame)
+        price_action = connection.get_price_action(key, time_frame)
         tbc.three_black_crows(key, price_action, time_frame)
         dtdb.double_top_double_bottom(key, price_action, time_frame)
 
+
 if __name__ == "__main__":
     #connection.get_symbol_list()
-    examineStrategies('1h')
+    examine_strategies('1h')

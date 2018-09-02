@@ -3,9 +3,9 @@ import pandas as pd
 import requests
 
 
-def get_price_action(_from, _to, time_frame):
+def get_price_action(key, time_frame):
     # data is in sorted in ascending order by time
-    data = requests.get(constants.url[id.price_action].format(time_frame, _from, _to),
+    data = requests.get(constants.url[id.price_action].format(time_frame, key),
                         params=constants.url_params[id.price_action]).json()
 
     # Converting it into a Dataframe
