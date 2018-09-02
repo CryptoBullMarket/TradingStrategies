@@ -23,6 +23,7 @@ three_white_soldiers = {
 
 double_top_double_bottom = {
     id.window_size: 14,
+    id.trend_strength: 25
 }
 
 # database

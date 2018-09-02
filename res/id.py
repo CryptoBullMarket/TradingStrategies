@@ -8,6 +8,7 @@ volume= 'volume'
 
 window_size = 'window_size'
 price_action = 'price_action'
+trend_strength = 'trend_strength'
 
 # time frame
 tf_string = 'tf_string'

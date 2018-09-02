@@ -1,5 +1,5 @@
 from handler import connection as connection
-from strategy import threeblackcrows as tbc, doubleTopDoubleBottom as dtdb
+from strategy import threeBlackCrows as tbc, doubleTopDoubleBottom as dtdb
 from res import constants as constants
 
 
