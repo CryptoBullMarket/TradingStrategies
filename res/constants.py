@@ -6,23 +6,20 @@ import os
 url = {
     id.price_action: 'https://api.bitfinex.com/v2/candles/trade:{}:t{}/hist',
 }
+
 # url params
 url_params = {
     id.price_action: {'sort': 1, 'limit': 50}
 }
 
 # strategy wise
-three_black_crow = {
-    id.window_size: 14,
-    id.wick_percentage: 0.5
-}
-three_white_soldiers = {
-    id.window_size: 14,
-    id.wick_percentage: 0.5
-}
 
-double_top_double_bottom = {
+strategy_params = {
+    id.doji_criteria: 1,
     id.window_size: 14,
+    id.wick_percentage: 0.5,
+    id.trend_strength: 25,
+    id.body_percentage: 10,
 }
 
 # database

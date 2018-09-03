@@ -8,6 +8,7 @@ volume= 'volume'
 
 window_size = 'window_size'
 price_action = 'price_action'
+trend_strength = 'trend_strength'
 
 # time frame
 tf_string = 'tf_string'
@@ -20,6 +21,8 @@ three_black_crow = 'three_black_crows'
 
 # three black crows ids
 wick_percentage = 'wick_percentage'
+body_percentage = 'body_percentage'
+doji_criteria = 'doji_criteria'
 
 
 # database

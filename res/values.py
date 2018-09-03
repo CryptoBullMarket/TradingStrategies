@@ -4,6 +4,7 @@ three_black_crow = 'Three Black Crows'
 three_white_soldiers = 'Three White Soldiers'
 double_top = 'Double Top'
 double_bottom = 'Double Bottom'
+bullish_abandoned_baby = 'Bullish Abandoned Baby'
 
 # time frame
 time_frame = {
