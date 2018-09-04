@@ -21,6 +21,8 @@ three_black_crow = 'three_black_crows'
 
 # three black crows ids
 wick_percentage = 'wick_percentage'
+body_percentage = 'body_percentage'
+doji_criteria = 'doji_criteria'
 
 
 # database

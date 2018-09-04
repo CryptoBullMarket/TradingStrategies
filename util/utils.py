@@ -1,3 +1,5 @@
+from math import floor as floor
+from res import constants as constants, id as id
 import talib as ta
 
 def __uptrend(price_action, window_size):
@@ -22,6 +24,12 @@ def __is_bear(open, close):
 
 def __is_bull(open, close):
     return close > open
+
+def __percentage_change(open, close):
+    return abs(open-close)/open*100
+
+def __is_doji(open,close):
+    return floor(abs(open-close)/open) < constants.bullish_abandoned_baby[id.doji_criteria]
 
 def __local_min_max(closingPrices):
     local_maxima = []

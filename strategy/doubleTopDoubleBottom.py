@@ -1,5 +1,5 @@
 from res import id as id, values as values, constants as constants
-from util import utils as util
+from util import utils as utils
 import handler.database as db
 import numpy as np
 import talib as ta
@@ -41,28 +41,28 @@ def check_double_bottom(price_action, indices_minima, obv):
 
 def double_top_double_bottom(key, price_action, time_frame):
 
-    window_size = constants.double_top_double_bottom[id.window_size]
+    window_size = constants.strategy_params[id.window_size]
     #To determine up/down trend and the strength
-    upTrend = util.__uptrend(price_action, window_size)
-    downTrend = util.__downtrend(price_action, window_size)
+    upTrend = utils.__uptrend(price_action.iloc[-2*window_size - 3:-3][id.close].values, window_size)
+    downTrend = utils.__downtrend(price_action.iloc[-2*window_size - 3:-3][id.close].values, window_size)
 
     #ADX to determine the strength of the trend and OBV to get volume of trades placed
-    adx = ta.ADX(price_action[id.high], price_action[id.low], price_action[id.close], window_size)
-    obv = ta.OBV(price_action[id.close], price_action[id.volume])
+    adx = ta.ADX(price_action.iloc[id.high], price_action.iloc[id.low], price_action.iloc[id.close], window_size)
+    obv = ta.OBV(price_action.iloc[id.close], price_action.iloc[id.volume])
 
 
     #Calculate the local maxima and minima in the window frame
-    local_minima, local_maxima, indices_minima, indices_maxima = util.__local_min_max(np.array(price_action[id.high]))
+    local_minima, local_maxima, indices_minima, indices_maxima = utils.__local_min_max(np.array(price_action.iloc[id.high]))
 
     notifier = {
         values.double_top: False,
         values.double_bottom: False
     }
 
-    if upTrend and adx[len(adx)-1] >= constants.double_top_double_bottom[id.trend_strength]:
-        notifier[values.double_top] = check_double_top(price_action, indices_maxima, obv)
-    if downTrend and adx[len(adx)-1] >= constants.double_top_double_bottom[id.trend_strength]:
-        notifier[values.double_bottom] = check_double_bottom(price_action, indices_minima, obv)
+    if upTrend and adx[len(adx)-1] >= constants.strategy_params[id.trend_strength]:
+        notifier[values.double_top] = check_double_top(price_action.iloc, indices_maxima, obv)
+    if downTrend and adx[len(adx)-1] >= constants.strategy_params[id.trend_strength]:
+        notifier[values.double_bottom] = check_double_bottom(price_action.iloc, indices_minima, obv)
 
     if notifier[values.double_top]:
         db.insert_strategy(key, time_frame, values.double_top, price_action.iloc[-1][id.time])
