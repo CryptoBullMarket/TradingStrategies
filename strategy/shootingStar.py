@@ -8,6 +8,7 @@ def shooting_star(key, price_action, time_frame):
 
     shooting_star = utils.__is_wick_len(utils.__body(price_action.iloc[-1][id.open], price_action.iloc[-1][id.close]), \
                     utils.__body(min(price_action.iloc[-1][id.open], price_action.iloc[-1][id.close]), price_action.iloc[-1][id.low])) \
+                    and utils.__small_lower_wick(price_action.iloc[-1][id.open], price_action.iloc[-1][id.close], price_action.iloc[-1][id.low]) \
                     and utils.__percentage_change(price_action.iloc[-1][id.open], price_action.iloc[-1][id.close]) < \
                     constants.strategy_params[id.small_body_percentage]
 
