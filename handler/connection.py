@@ -11,7 +11,7 @@ def get_price_action(key, time_frame):
     # Converting it into a Dataframe
     data = pd.DataFrame(data)
 
-    data.columns = [id.time, id.open, id.close, id.high, id.low, id.volume]
+    #data.columns = [id.time, id.open, id.close, id.high, id.low, id.volume]
 
     # filter data as needed
     return data

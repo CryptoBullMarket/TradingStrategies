@@ -31,6 +31,16 @@ def __percentage_change(open, close):
 def __is_doji(open,close):
     return floor(abs(open-close)/open) < constants.bullish_abandoned_baby[id.doji_criteria]
 
+def __is_wick_len(body, wick):
+    return (body/wick) <= 0.5
+
+# price can be either open or close, depending upon where the gap is to be checked
+def __is_gap_down(price, open, close):
+    return price < min(open, close)
+
+def __is_gap_up(price, open, close):
+    return price > max(open, close)
+
 def __local_min_max(closingPrices):
     local_maxima = []
     local_minima = []

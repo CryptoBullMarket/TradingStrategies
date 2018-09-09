@@ -22,7 +22,11 @@ three_black_crow = 'three_black_crows'
 # three black crows ids
 wick_percentage = 'wick_percentage'
 body_percentage = 'body_percentage'
+small_body_percentage = 'small_body_percentage'
 doji_criteria = 'doji_criteria'
+
+# shhooting star
+wick_length = 'wick_length'
 
 
 # database
