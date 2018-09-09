@@ -1,0 +1,15 @@
+Additions of constants and function
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch ira
+# Changes to be committed:
+#	modified:   handler/connection.py
+#	modified:   res/constants.py
+#	modified:   res/id.py
+#	modified:   res/values.py
+#	modified:   strategy/eveningStar.py
+#	modified:   strategy/morningStar.py
+#	modified:   strategy/shootingStar.py
+#	modified:   util/utils.py
+#
