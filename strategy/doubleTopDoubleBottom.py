@@ -15,8 +15,8 @@ def check_double_top(price_action, indices_maxima, obv):
         nextHighVal = price_action[id.high].iloc[indices_maxima[i + 1]]
         minVal = price_action[id.low].iloc[indices_maxima[i]:indices_maxima[i + 1]].min()
 
-        if nextHighVal >= closeVal and nextHighVal <= highVal and obv[indices_maxima[i]] >= obv[indices_maxima[i+1]]:
-            for j in range(indices_maxima[i+1] + 1, len(price_action)-1):
+        if nextHighVal >= closeVal and nextHighVal <= highVal and obv[indices_maxima[i]] >= obv[indices_maxima[ i +1]]:
+            for j in range(indices_maxima[ i +1] + 1, len(price_action ) -1):
                 if price_action[id.close].iloc[j] < minVal:
                     isDoubleTop = True
                     break
@@ -42,27 +42,26 @@ def check_double_bottom(price_action, indices_minima, obv):
 def double_top_double_bottom(key, price_action, time_frame):
 
     window_size = constants.strategy_params[id.window_size]
-    #To determine up/down trend and the strength
-    upTrend = utils.__uptrend(price_action.iloc[-2*window_size - 3:-3][id.close].values, window_size)
-    downTrend = utils.__downtrend(price_action.iloc[-2*window_size - 3:-3][id.close].values, window_size)
+    # To determine up/down trend and the strength
+    upTrend = utils.__uptrend(price_action.iloc[- 2 *window_size - 3:-3][id.close].values, window_size)
+    downTrend = utils.__downtrend(price_action.iloc[- 2 *window_size - 3:-3][id.close].values, window_size)
 
-    #ADX to determine the strength of the trend and OBV to get volume of trades placed
-    adx = ta.ADX(price_action.iloc[id.high], price_action.iloc[id.low], price_action.iloc[id.close], window_size)
-    obv = ta.OBV(price_action.iloc[id.close], price_action.iloc[id.volume])
+    # ADX to determine the strength of the trend and OBV to get volume of trades placed
+    adx = ta.ADX(price_action[id.high], price_action[id.low], price_action[id.close], window_size)
+    obv = ta.OBV(price_action[id.close], price_action[id.volume])
 
-
-    #Calculate the local maxima and minima in the window frame
-    local_minima, local_maxima, indices_minima, indices_maxima = utils.__local_min_max(np.array(price_action.iloc[id.high]))
+    # Calculate the local maxima and minima in the window frame
+    local_minima, local_maxima, indices_minima, indices_maxima = utils.__local_min_max(np.array(price_action[id.high]))
 
     notifier = {
         values.double_top: False,
         values.double_bottom: False
     }
 
-    if upTrend and adx[len(adx)-1] >= constants.strategy_params[id.trend_strength]:
-        notifier[values.double_top] = check_double_top(price_action.iloc, indices_maxima, obv)
-    if downTrend and adx[len(adx)-1] >= constants.strategy_params[id.trend_strength]:
-        notifier[values.double_bottom] = check_double_bottom(price_action.iloc, indices_minima, obv)
+    if upTrend and adx[len(adx ) -1] >= constants.strategy_params[id.trend_strength]:
+        notifier[values.double_top] = check_double_top(price_action, indices_maxima, obv)
+    if downTrend and adx[len(adx ) -1] >= constants.strategy_params[id.trend_strength]:
+        notifier[values.double_bottom] = check_double_bottom(price_action, indices_minima, obv)
 
     if notifier[values.double_top]:
         db.insert_strategy(key, time_frame, values.double_top, price_action.iloc[-1][id.time])
