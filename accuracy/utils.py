@@ -1,18 +1,18 @@
 from math import floor as floor
 from res import constants as constants, id as id
-import talib as ta
+from talib import _ta_lib as ta
 
 def __uptrend(price_action, window_size):
     ema = ta.EMA(price_action, window_size)
-    for i in range(1, window_size + 1):
-        if price_action[-i] < ema[-i]:
+    for i in range(0, window_size):
+        if price_action[i] < ema[i]:
             return False
     return True
 
 def __downtrend(price_action, window_size):
     ema = ta.EMA(price_action, window_size)
-    for i in range(1, window_size + 1):
-        if price_action[-i] > ema[-i]:
+    for i in range(0, window_size):
+        if price_action[i] > ema[i]:
             return False
     return True
 
@@ -29,7 +29,7 @@ def __percentage_change(open, close):
     return abs(open-close)/open*100
 
 def __is_doji(open,close):
-    return floor(abs(open-close)/open) < constants.bullish_abandoned_baby[id.doji_criteria]
+    return floor(abs(open-close)/open) < constants.id.doji_criteria
 
 def __is_wick_len(body, wick):
     return (body/wick) <= 0.5

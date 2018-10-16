@@ -4,7 +4,7 @@ import handler.database as db
 
 def shooting_star(key, price_action, time_frame):
     window_size = constants.strategy_params.window_size
-    uptrend = utils.__downtrend(price_action.iloc[-window_size - 1:-1][id.close].values, window_size)
+    uptrend = utils.__uptrend(price_action.iloc[-window_size - 1:-1][id.close].values, window_size)
 
     shooting_star = utils.__is_wick_len(utils.__body(price_action.iloc[-1][id.open], price_action.iloc[-1][id.close]), \
                     utils.__body(min(price_action.iloc[-1][id.open], price_action.iloc[-1][id.close]), price_action.iloc[-1][id.low])) \

@@ -1,3 +1,4 @@
+from datetime import datetime
 from res import id as id
 import os
 
@@ -9,8 +10,10 @@ url = {
 
 # url params
 url_params = {
-    id.price_action: {'sort': 1, 'limit': 50}
+    id.price_action: {'sort': 0, 'limit': 1000}
 }
+
+#'start': str(datetime.now().timestamp()*1000)
 
 # strategy wise
 

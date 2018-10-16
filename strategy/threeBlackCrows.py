@@ -19,7 +19,7 @@ def three_black_crows(key, price_action, time_frame):
     # crows=check if the last 3 candles are crows
     crows = utils.__is_bear(price_action.iloc[-1][id.open], price_action.iloc[-1][id.close]) \
             and utils.__is_bear(price_action.iloc[-2][id.open], price_action.iloc[-2][id.close]) \
-            and utils.__is_bear(price_action.iloc[-3][id.open], price_action.iloc[-3][id.close]) \
+            and utils.__is_ibear(price_action.iloc[-3][id.open], price_action.iloc[-3][id.close]) \
             and __is_lower(price_action.iloc[-1][id.open], price_action.iloc[-1][id.close],
                            price_action.iloc[-2][id.open], price_action.iloc[-2][id.close], price_action.iloc[-2][id.low]) \
             and __is_lower(price_action.iloc[-2][id.open], price_action.iloc[-2][id.close],
