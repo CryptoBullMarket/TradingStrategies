@@ -1,13 +1,6 @@
-from res import constants as constants, id as id
 from strategy import shootingStar as ss
-from accuracy import utils
-from datetime import datetime
-import requests
-import pandas as pd
+from util import utils
 import pickle
-import time
-from accuracy import strategies as st
-import threading
 
 # files are pair_wise and time_frame_wise
 pairs = ['ltcusd', 'btcusd', 'xmrbtc', 'ethusd', 'ethbtc', 'etcusd', 'etcbtc', 'xrpusd']
@@ -41,7 +34,7 @@ for time_frame in time_frames:
                         downtrend = utils.__downtrend(data['close'][w_start: w_start + window_size].values, window_size)
 
                         # shooting star
-                        shooting_star = st.shooting_star(data, w_start, window_size, lower_wick, small_body)
+                        shooting_star = ss.shooting_star(data, w_start, window_size, lower_wick, small_body)
                         if uptrend and shooting_star:
                             # verify if it is followed by a downtrend
                             downtrend = utils.__downtrend(
