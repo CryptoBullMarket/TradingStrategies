@@ -1,16 +1,9 @@
-from res import constants as constants, id as id, values as values
-from util import utils as utils
-import handler.database as db
+from util import utils
 
-def shooting_star(key, price_action, time_frame):
-    window_size = constants.strategy_params.window_size
-    uptrend = utils.__uptrend(price_action.iloc[-window_size - 1:-1][id.close].values, window_size)
-
-    shooting_star = utils.__is_wick_len(utils.__body(price_action.iloc[-1][id.open], price_action.iloc[-1][id.close]), \
-                    utils.__body(min(price_action.iloc[-1][id.open], price_action.iloc[-1][id.close]), price_action.iloc[-1][id.low])) \
-                    and utils.__small_lower_wick(price_action.iloc[-1][id.open], price_action.iloc[-1][id.close], price_action.iloc[-1][id.low]) \
-                    and utils.__percentage_change(price_action.iloc[-1][id.open], price_action.iloc[-1][id.close]) < \
-                    constants.strategy_params[id.small_body_percentage]
-
-    if uptrend and shooting_star:
-        db.insert_strategy(key, time_frame, values.shooting_star, price_action.iloc[-1][id.time])
+def shooting_star(data, w_start, window_size, lower_wick, small_body):
+    shooting_star = utils.__small_lower_wick(data['open'].values[w_start + window_size],
+                                          data['close'].values[w_start + window_size], \
+                                         data['low'].values[w_start + window_size], lower_wick) and \
+                    utils.__percentage_change(data['open'].values[w_start + window_size],
+                                              data['close'].values[window_size]) <= small_body
+    return shooting_star

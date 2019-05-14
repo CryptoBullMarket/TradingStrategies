@@ -16,6 +16,9 @@ def __downtrend(price_action, window_size):
             return False
     return True
 
+def __small_lower_wick(open, close, low, param):
+    return abs(min(open, close)-low)/__body(open, close) < param
+
 def __body(open, close):
     return abs(open-close)
 

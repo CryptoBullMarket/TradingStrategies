@@ -4,7 +4,8 @@ import pickle
 
 # files are pair_wise and time_frame_wise
 pairs = ['ltcusd', 'btcusd', 'xmrbtc', 'ethusd', 'ethbtc', 'etcusd', 'etcbtc', 'xrpusd']
-time_frames = ['15m', '30m', '1h', '3h', '6h', '12h', '1D']
+# run for 15m if enough time
+time_frames = ['30m', '1h', '3h', '6h', '12h', '1D']
 
 result = []
 

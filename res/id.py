@@ -1,5 +1,5 @@
 # api id
-time = 'time'
+time = 'mts'
 open = 'open'
 close = 'close'
 high = 'high'
